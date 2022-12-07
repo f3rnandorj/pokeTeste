@@ -1,15 +1,14 @@
 import * as React from "react";
+import { StatusBar } from "react-native";
+import { Header } from "../../components/Header";
 
-import { Background } from "../../components/Background";
-
-import { Container, Text } from "./styles";
+import { Container } from "./styles";
 
 export function Home() {
   return (
-    <Background>
-      <Container>
-        <Text>Hello home</Text>
-      </Container>
-    </Background>
+    <Container>
+      <StatusBar translucent backgroundColor="transparent" />
+      <Header />
+    </Container>
   );
 }
