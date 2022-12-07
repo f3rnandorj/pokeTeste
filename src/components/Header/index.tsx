@@ -4,10 +4,11 @@ import header from "../../assets/header.png";
 
 import {
   Container,
-  Text,
   TextContainer,
   Title,
+  Text,
   AvatarContainer,
+  PhotoContainer,
   Photo,
 } from "./styles";
 
@@ -20,11 +21,13 @@ export function Header() {
       </TextContainer>
 
       <AvatarContainer>
-        <Photo
-          source={{
-            uri: "https://avatars.githubusercontent.com/u/108803562?v=4",
-          }}
-        />
+        <PhotoContainer>
+          <Photo
+            source={{
+              uri: "https://avatars.githubusercontent.com/u/108803562?v=4",
+            }}
+          />
+        </PhotoContainer>
       </AvatarContainer>
     </Container>
   );
