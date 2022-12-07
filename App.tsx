@@ -8,6 +8,8 @@ import {
 } from "@expo-google-fonts/inter";
 
 import { Routes } from "./src/routes";
+import React from "react";
+import { Loading } from "./src/components/Loading";
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -20,7 +22,7 @@ export default function App() {
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
-      <Routes />
+      {fontLoaded ? <Routes /> : <Loading />}
     </>
   );
 }

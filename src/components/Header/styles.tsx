@@ -5,7 +5,7 @@ export const Container = styled.View`
   background-color: #494949;
   justify-content: space-between;
   flex-direction: row;
-  height: 154px;
+  height: ${RFValue(154)}px;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
 `;
@@ -38,11 +38,12 @@ export const PhotoContainer = styled.View`
   background: #fff;
   width: ${RFValue(52)}px;
   height: ${RFValue(52)}px;
-  border: 3px solid #fff;
   border-radius: ${RFValue(10)}px;
 `;
 
 export const Photo = styled.Image`
+  align-self: center;
+  margin-top: ${RFValue(2)}px;
   width: ${RFValue(47)}px;
   height: ${RFValue(47)}px;
   border-radius: ${RFValue(10)}px;

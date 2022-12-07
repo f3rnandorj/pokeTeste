@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -8,15 +9,15 @@ export const Container = styled.SafeAreaView`
 
 export const Img = styled.Image`
   background: #fff;
-  width: 142px;
-  height: 51px;
+  width: ${RFValue(142)}px;
+  height: ${RFValue(51)}px;
 `;
 
 export const Animation = styled.Image`
   background: #fff;
-  width: 89px;
-  height: 109px;
-  margin-bottom: 30px;
+  width: ${RFValue(89)}px;
+  height: ${RFValue(109)}px;
+  margin-bottom: ${RFValue(30)}px;
 `;
 
 export const Text = styled.Text`
