@@ -24,5 +24,5 @@ export const Text = styled.Text`
   font-size: 11px;
   text-align: center;
   color: #282828;
-  font-family: "Inter_700Bold";
+  /* font-family: "Inter_700Bold"; */
 `;

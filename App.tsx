@@ -7,9 +7,12 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 
+import { ThemeProvider } from "styled-components";
+
 import { Routes } from "./src/routes";
 import React from "react";
 import { Loading } from "./src/components/Loading";
+import theme from "./src/styles/theme";
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -22,7 +25,9 @@ export default function App() {
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
-      {fontLoaded ? <Routes /> : <Loading />}
+      <ThemeProvider theme={theme}>
+        {fontLoaded ? <Routes /> : <Loading />}
+      </ThemeProvider>
     </>
   );
 }

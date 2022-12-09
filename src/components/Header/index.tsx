@@ -17,7 +17,7 @@ export function Header() {
     <Container>
       <TextContainer>
         <Title>Olá, Ash Ketchum</Title>
-        <Text>Bem Vindo!</Text>
+        <Text>Bem Vindo!😁</Text>
       </TextContainer>
 
       <AvatarContainer>
