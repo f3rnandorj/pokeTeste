@@ -1,5 +1,4 @@
 import React from "react";
-import * as Svg from "react-native-svg";
 
 import { ReactComponent as TypeBug } from "./bug.svg";
 import { ReactComponent as TypeDark } from "./dark.svg";

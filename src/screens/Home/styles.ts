@@ -1,6 +1,4 @@
 import styled from "styled-components/native";
-import { FlatList } from "react-native";
-import { PokeCardProps } from "../../components/PokeCard";
 import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.SafeAreaView`
@@ -13,7 +11,7 @@ export const Title = styled.Text`
   padding: ${RFValue(40)}px ${RFValue(20)}px;
 `;
 
-export const List = styled.TouchableOpacity`
+export const List = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;

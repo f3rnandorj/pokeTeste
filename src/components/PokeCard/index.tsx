@@ -1,45 +1,39 @@
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
-
 import {
   Container,
-  ContainerLeft,
+  ContainerType,
   Name,
-  TypeContainer,
-  Title,
-  Text,
-  ContainerRight,
-  TitleId,
-  AvatarContainer,
+  PokemonType,
+  ContainerAvatar,
+  PokemonId,
   Avatar,
 } from "./styles";
 
 export interface PokeCardProps {
   id: string;
   name: string;
-  type: string;
-  color: string;
-  avatar_url: string;
+  types: string;
+  backgroundColor: string;
+  avatar: string;
 }
 
-export function PokeCard({ color, name, id, type, avatar_url }: PokeCardProps) {
+export function PokeCard({
+  backgroundColor,
+  name,
+  id,
+  types,
+  avatar,
+}: PokeCardProps) {
   return (
-    <TouchableOpacity>
-      <Container color={color}>
-        <ContainerLeft>
-          <Name>{name}</Name>
-          <TypeContainer>
-            <Title>Planta</Title>
-            <Text>Venenoso</Text>
-          </TypeContainer>
-        </ContainerLeft>
+    <Container color={backgroundColor}>
+      <ContainerType>
+        <Name>{name}</Name>
+        <PokemonType color={backgroundColor}>{types}</PokemonType>
+      </ContainerType>
 
-        <ContainerRight>
-          <TitleId>{id}</TitleId>
-          <AvatarContainer>
-            <Avatar source={{ uri: avatar_url }} />
-          </AvatarContainer>
-        </ContainerRight>
-      </Container>
-    </TouchableOpacity>
+      <ContainerAvatar>
+        <PokemonId>{id}</PokemonId>
+        <Avatar source={{ uri: avatar }} />
+      </ContainerAvatar>
+    </Container>
   );
 }
