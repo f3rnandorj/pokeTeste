@@ -5,13 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 import api from "../../services/api";
 
-import async from "async";
-
 import logo from "../../assets/logo.png";
-import { Container, Title, List, Footer, Img } from "./styles";
+import { Container, Title, List, Type, Footer, Img } from "./styles";
 
-import { pokemons } from "../../mocks/pokemons";
-import { PokeCard, PokeCardProps } from "../../components/PokeCard";
+import { PokeCard } from "../../components/PokeCard";
 import { Header } from "../../components/Header";
 
 interface PokemonApiProps {
@@ -21,6 +18,7 @@ interface PokemonApiProps {
     {
       type: {
         name: string;
+        color: string;
       };
     }
   ];
@@ -31,6 +29,13 @@ interface PokemonApiProps {
       };
     };
   };
+  color: string;
+  type: [];
+}
+
+export interface pokemonType {
+  typeColor: string;
+  name: string;
 }
 
 export function Home() {
@@ -39,37 +44,47 @@ export function Home() {
 
   const navigation = useNavigation();
 
-  let apiData: PokemonApiProps[] = [];
-
   useEffect(() => {
     async function HandleGetPokemon() {
+      const apiData: PokemonApiProps[] = [];
+
       const response = await api.get(`/pokemon/`);
       const { results } = response.data;
 
-      for (let i = 0; i < results.length; i++) {
-        const name = results[i].name;
+      for (let pokemon of results) {
+        const name = pokemon.name;
+
         await api.get(`/pokemon/${name}/`).then((response) => {
-          apiData.push(response.data);
+          let backgroundColor = response.data.types[0].type
+            .name as keyof typeof colors.type;
+
+          //condição unica para pokemon do tipo normal
+          backgroundColor === "normal" && response.data.types.length > 1
+            ? (backgroundColor = response.data.types[1].type.name)
+            : null;
+
+          const color = colors.type?.[backgroundColor];
+
+          //Renderização type e colorType
+          const type = response.data.types.map((pokemonType: any) => {
+            const typeName = pokemonType.type
+              .name as keyof typeof colors.backgroundType;
+
+            return {
+              name: typeName,
+              typeColor: colors.backgroundType[typeName],
+            };
+          });
+
+          apiData.push({ ...response.data, color, type });
         });
       }
+
       setPokemonData(apiData);
     }
 
     HandleGetPokemon();
-
-    // // function changeColor(type: string) {
-    // //   colors.type.map((index) => {
-    // //     if (index === type) {
-    // //       return index;
-    // //     }
-    // //   });
-    // //   changeColor();
-    // }
-  }, [pokemonData]);
-
-  // function handleOpenPokemon({ id }: PokeCardProps) {
-  //   navigation.navigate("pokemon", id);
-  // }
+  }, []);
 
   return (
     <Container>
@@ -82,10 +97,14 @@ export function Home() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <PokeCard
-              backgroundColor={item.backgroundColor}
+              backgroundColor={item.color}
               id={item.id}
               name={item.name}
-              types={item.types[0].type.name}
+              types={item.type.map((pokemonType: pokemonType) => (
+                <Type color={pokemonType.typeColor} key={pokemonType.name}>
+                  {pokemonType.name}
+                </Type>
+              ))}
               avatar={item.sprites.other["official-artwork"].front_default}
             />
           )}

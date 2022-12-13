@@ -16,7 +16,9 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   margin: ${RFValue(3)}px;
 `;
 
-export const ContainerType = styled.View``;
+export const ContainerType = styled.View`
+  align-items: center;
+`;
 
 export const Name = styled.Text`
   font-size: ${RFValue(14)}px;
@@ -24,25 +26,9 @@ export const Name = styled.Text`
   color: #fff;
   align-self: center;
   padding: ${RFValue(23)}px 0 ${RFValue(5)}px ${RFValue(10)}px;
-  white-space: nowrap;
 `;
 
-export const TypeContainer = styled.View`
-  height: ${RFValue(42)}px;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-export const PokemonType = styled.Text<ContainerProps>`
-  height: ${RFValue(18)}px;
-  width: ${RFValue(60)}px;
-  font-size: ${RFValue(13)}px;
-  background: ${({ color }) => (color ? color : "#d8d8d8")};
-  color: #fff;
-  border-radius: 38px;
-  text-align: center;
-  margin-bottom: ${RFValue(8)}px;
-`;
+export const PokemonType = styled.View``;
 
 export const ContainerAvatar = styled.View`
   flex: 1;
@@ -55,6 +41,8 @@ export const PokemonId = styled.Text`
   color: #fff;
 `;
 
-export const Avatar = styled.Image`
+export const Avatar = styled.Image.attrs({
+  resizeMode: "contain",
+})`
   flex: 1;
 `;
