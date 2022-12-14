@@ -34,7 +34,7 @@ Em ambas situações você deverá baixar o aplicativo "EXPO GO" ele permitira q
 Após iniciar a aplicação escolha e clique em um pokemon, você sera redirecionado para uma segunda pagina, contendo informações unicas, referente a aquele pokemon.
 
 ------------------------------------------------------------------
-
+![WhatsApp Image 2022-12-13 at 21 39 52](https://user-images.githubusercontent.com/108803562/207476178-d3aaca7d-ae18-4a1c-964a-7c461d987379.jpeg)
 ------------------------------------------------------------------
 Qualquer dúvida entre em contato por <a href="mailto:f3rnandorj10@gmail.com?">f3rnandorj10@gmail.com</a>
 
