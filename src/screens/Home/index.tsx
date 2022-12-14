@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { FlatList, StatusBar, Text } from "react-native";
+import { FlatList, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import { useTheme } from "styled-components";
 import api from "../../services/api";
 
@@ -48,36 +49,43 @@ export function Home() {
     async function HandleGetPokemon() {
       const apiData: PokemonApiProps[] = [];
 
-      const response = await api.get(`/pokemon/`);
+      const response = await api
+        .get(`/pokemon/`)
+        .catch((err) => console.log(err));
+
       const { results } = response.data;
 
-      for (let pokemon of results) {
-        const name = pokemon.name;
+      try {
+        for (let pokemon of results) {
+          const name = pokemon.name;
+          await api.get(`/pokemon/${name}/`).then((response) => {
+            let backgroundColor = response.data.types[0].type
+              .name as keyof typeof colors.type;
 
-        await api.get(`/pokemon/${name}/`).then((response) => {
-          let backgroundColor = response.data.types[0].type
-            .name as keyof typeof colors.type;
+            //condição que força a utilização da cor do segundo tipo, caso o pokemon seja do tipo normal
+            backgroundColor === "normal" && response.data.types.length > 1
+              ? (backgroundColor = response.data.types[1].type.name)
+              : null;
 
-          //condição unica para pokemon do tipo normal
-          backgroundColor === "normal" && response.data.types.length > 1
-            ? (backgroundColor = response.data.types[1].type.name)
-            : null;
+            //variavel que guarda a cor do fundo do card
+            const color = colors.type?.[backgroundColor];
 
-          const color = colors.type?.[backgroundColor];
+            //variavel que carrega a logica de cor e dos principais tipos do pokemon
+            const type = response.data.types.map((pokemonType: any) => {
+              const typeName = pokemonType.type
+                .name as keyof typeof colors.backgroundType;
 
-          //Renderização type e colorType
-          const type = response.data.types.map((pokemonType: any) => {
-            const typeName = pokemonType.type
-              .name as keyof typeof colors.backgroundType;
+              return {
+                name: typeName,
+                typeColor: colors.backgroundType[typeName],
+              };
+            });
 
-            return {
-              name: typeName,
-              typeColor: colors.backgroundType[typeName],
-            };
+            apiData.push({ ...response.data, color, type });
           });
-
-          apiData.push({ ...response.data, color, type });
-        });
+        }
+      } catch (err) {
+        console.log(err);
       }
 
       setPokemonData(apiData);
@@ -85,6 +93,10 @@ export function Home() {
 
     HandleGetPokemon();
   }, []);
+
+  function handleOpenPokemon() {
+    navigation.navigate("pokemon");
+  }
 
   return (
     <Container>
@@ -97,8 +109,9 @@ export function Home() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <PokeCard
+              onPress={() => handleOpenPokemon()}
               backgroundColor={item.color}
-              id={item.id}
+              id={item.id.toString().padStart(3, "0")}
               name={item.name}
               types={item.type.map((pokemonType: pokemonType) => (
                 <Type color={pokemonType.typeColor} key={pokemonType.name}>

@@ -29,7 +29,7 @@ export const Type = styled.Text<ContainerProps>`
   border-radius: ${RFValue(38)}px;
   color: #fff;
   text-align: center;
-  margin-bottom: ${RFValue(6)}px;
+  margin-bottom: ${RFValue(4)}px;
 `;
 
 export const Footer = styled.View`

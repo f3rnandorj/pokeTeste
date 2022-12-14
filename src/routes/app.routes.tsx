@@ -7,7 +7,10 @@ const Stack = createNativeStackNavigator();
 
 export function AppRoutes() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      initialRouteName="home"
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="pokemon" component={Pokemon} />
     </Stack.Navigator>
