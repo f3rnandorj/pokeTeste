@@ -3,6 +3,11 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 interface ContainerProps {
   color: string;
+  onPress: () => void;
+}
+
+interface PokemonTypeProps {
+  color: string;
 }
 
 export const Container = styled.TouchableOpacity<ContainerProps>`
@@ -28,7 +33,7 @@ export const Name = styled.Text`
   padding: ${RFValue(23)}px ${RFValue(10)}px ${RFValue(5)}px ${RFValue(20)}px;
 `;
 
-export const PokemonType = styled.View<ContainerProps>``;
+export const PokemonType = styled.View<PokemonTypeProps>``;
 
 export const ContainerAvatar = styled.View`
   padding-right: ${RFValue(15)}px;

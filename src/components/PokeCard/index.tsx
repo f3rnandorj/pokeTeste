@@ -8,18 +8,13 @@ import {
   Avatar,
 } from "./styles";
 
-export interface PokeTypes {
-  name: string;
-  typeColor: string;
-  types: string;
-}
-
 export interface PokeCardProps {
   id: string;
   name: string;
-  types?: string[];
+  types: any;
   backgroundColor: string;
   avatar: string;
+  onPress: () => void;
 }
 
 export function PokeCard({
@@ -28,9 +23,10 @@ export function PokeCard({
   id,
   types,
   avatar,
+  onPress,
 }: PokeCardProps) {
   return (
-    <Container onPress={() => {}} color={backgroundColor}>
+    <Container onPress={onPress} color={backgroundColor}>
       <ContainerType>
         <Name>{name}</Name>
         <PokemonType color={backgroundColor}>{types}</PokemonType>

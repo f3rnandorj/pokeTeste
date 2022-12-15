@@ -34,7 +34,7 @@ interface PokemonApiProps {
   type: [];
 }
 
-export interface pokemonType {
+export interface PokemonType {
   typeColor: string;
   name: string;
 }
@@ -94,8 +94,8 @@ export function Home() {
     HandleGetPokemon();
   }, []);
 
-  function handleOpenPokemon() {
-    navigation.navigate("pokemon");
+  function handleOpenPokemon(pokemonData: PokemonApiProps) {
+    navigation.navigate("pokemon", pokemonData);
   }
 
   return (
@@ -109,11 +109,11 @@ export function Home() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <PokeCard
-              onPress={() => handleOpenPokemon()}
+              onPress={() => handleOpenPokemon(item)}
               backgroundColor={item.color}
               id={item.id.toString().padStart(3, "0")}
               name={item.name}
-              types={item.type.map((pokemonType: pokemonType) => (
+              types={item.type.map((pokemonType: PokemonType) => (
                 <Type color={pokemonType.typeColor} key={pokemonType.name}>
                   {pokemonType.name}
                 </Type>
