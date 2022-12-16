@@ -11,7 +11,12 @@ import {
 export interface PokeCardProps {
   id: string;
   name: string;
-  types: any;
+  types: [
+    type: {
+      name: string;
+      color: string;
+    }
+  ];
   backgroundColor: string;
   avatar: string;
   onPress: () => void;
@@ -29,7 +34,7 @@ export function PokeCard({
     <Container onPress={onPress} color={backgroundColor}>
       <ContainerType>
         <Name>{name}</Name>
-        <PokemonType color={backgroundColor}>{types}</PokemonType>
+        <PokemonType color={types[0].color}>{types[0].name}</PokemonType>
       </ContainerType>
 
       <ContainerAvatar>
